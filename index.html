@@ -221,7 +221,7 @@
         .addEventListener("click", async () => {
           const container = document.getElementById("resultado");
           const tipo = tipoFiltro.value;
-          let query = supabaseClient.from("lista do lider").select("*");
+          let query = supabaseClient.from("lista_do_lider").select("*");
 
           if (tipo === "dia") {
             const dia = document.getElementById("dataDia").value;
