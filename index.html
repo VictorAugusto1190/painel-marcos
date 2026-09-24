@@ -117,6 +117,15 @@
         gap: 4px;
         font-size: 14px;
       }
+      .observacoes-box {
+        margin-top: 12px;
+        background: #fff3cd;
+        border: 1px solid #ffeeba;
+        padding: 10px 12px;
+        border-radius: 6px;
+        font-size: 13px;
+        color: #856404;
+      }
 
       /* MEDIA QUERIES PARA ADAPTAR EM TELAS MAIORES */
       @media (min-width: 600px) {
@@ -193,7 +202,7 @@
 
     <script>
       const SUPABASE_URL = "https://dhhdzqyymfoxsupdrbzc.supabase.co";
-      const SUPABASE_KEY = "sb_publishable_BCsQH9GoCB6Dz3y7DjxIZA_ykZAjRYi"; // Substitua pela sua anon key
+      const SUPABASE_KEY = "sb_publishable_BCsQH9GoCB6Dz3y7DjxIZA_ykZAjRYi"; 
       const supabaseClient = window.supabase.createClient(
         SUPABASE_URL,
         SUPABASE_KEY,
@@ -269,6 +278,9 @@
             const [ano, mes, dia] = reg.data.split("-");
             const dataExibicao = `${dia}/${mes}/${ano}`;
 
+            // Tratamento caso o campo no banco se chame 'observacoes' ou 'observacao'
+            const textoObservacoes = reg.observacoes || reg.observacao;
+
             html += `
             <div class="checklist-card">
               <div class="info-envio">
@@ -299,6 +311,17 @@
                     : "<p style='font-size:13px; color:#777'>Sem pendências.</p>"
                 }
               </div>
+
+              ${
+                textoObservacoes
+                  ? `
+                <div class="observacoes-box">
+                  <strong>💬 Observações do Líder:</strong><br>
+                  <span>${textoObservacoes}</span>
+                </div>
+              `
+                  : ""
+              }
             </div>
           `;
           });
